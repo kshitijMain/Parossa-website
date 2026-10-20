@@ -14,7 +14,7 @@
 
 ## Kick-off prompt (owner: paste this into Claude)
 
-> Read `docs/WEBSITE_UPDATE_PLAN.md` and `docs/BRD.md` in full before changing anything. Then carry out the plan phase by phase, starting with Phase 0. After each phase: run the checks listed for that phase, commit with the message given, and give me a short summary (what changed, anything you had to decide). Do Phase 10 (images) only when I tell you the photos are in `assets-src/images/`. Ask me only if the plan conflicts with the code in a way the plan doesn't cover. Never invent customers, testimonials, metrics or features.
+> Read `docs/WEBSITE_UPDATE_PLAN.md` and `docs/BRD.md` in full before changing anything. Then carry out the plan phase by phase, starting with Phase 0. After each phase: run the checks listed for that phase, commit with the message given, and give me a short summary (what changed, anything you had to decide). The photos are in `assets-src/images/`. Ask me only if the plan conflicts with the code in a way the plan doesn't cover. Never invent customers, testimonials, metrics or features.
 
 ---
 
@@ -890,7 +890,7 @@ Run and fix until all of these pass:
 
 Commit: `chore: QA pass for Parossa launch build`.
 
-### Phase 10: Photos (only after the owner says they're in `assets-src/images/`)
+### Phase 10: Photos (they're in `assets-src/images/`)
 
 1. **Source images.** The owner saves ChatGPT outputs as `assets-src/images/<name>.png` (or `.jpg`/`.webp`) using the names in §6.
    - Add `assets-src/*` to `.gitignore` except `assets-src/README.md`, which explains the workflow. Originals are large; only the optimised outputs in `public/img/` are committed.
