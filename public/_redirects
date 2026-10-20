@@ -1,0 +1,7 @@
+# Static assets — return 404 when missing (do not serve index.html to GLTF/image loaders)
+/models/* 404
+/img/* 404
+/assets/* 404
+
+# SPA fallback — client-side routes only
+/*    /index.html   200

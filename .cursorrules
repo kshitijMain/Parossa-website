@@ -1,0 +1,52 @@
+PROJECT
+You are building a fast, modern, mobile-first STATIC marketing landing page (no backend, no database, mock/placeholder data) for a restaurant-tech SaaS product. Single-page scrolling site plus a few static legal pages. Deployable to Netlify/Vercel/GitHub Pages over HTTPS.
+
+PRODUCT (what it does — for your understanding, not all of it goes on the page)
+An all-in-one guest-experience platform for restaurants. Guests scan a table QR to open a no-install web menu where dishes render in 3D and can be placed in AR on their real table before ordering; or they use a fixed on-table tablet with reorder, bestseller + AI dish suggestions, voice search, and one-tap service calls (water, bill, cutlery, waiter), and can self-order and self-pay. Behind the scenes: instant digital kitchen order tickets (KOTs) go straight to a kitchen display, the chef marks an item done and the waiter is pinged on their wrist, billing is paperless with print-on-request, every action is logged for a full audit trail, and owners get analytics (bestsellers, sales, peak hours, table turnover, prep times, orders per waiter) plus a per-dish review base built from digital-bill feedback. A hyperlocal delivery marketplace is a future, separate product.
+
+AUDIENCE & MESSAGE
+Primary audience = restaurant owners and managers (the buyers). Lead with THEIR outcomes — faster table turns, fewer order errors, less wasted staff time, happier guests, more repeat visits — not a feature list. The guest-facing delight (AR menu, self-order) is the supporting story that proves those outcomes. Above the fold must state in one line that this is a full guest-experience platform, not just a KOT tool. Every screen must have one clear primary action: "Book a demo".
+
+NAME
+Use a single name token from src/config/site.ts (export const NAME = "Thali"). Use {NAME} identically in titles, nav, footer, legal text, meta tags, and JSON-LD. Never hardcode the name anywhere else.
+
+VALUE PROPOSITION (locked default — keep in src/config/site.ts)
+eyebrow: "The all-in-one guest-experience platform for restaurants."
+headline: "Turn more tables. Lose fewer orders. Delight every guest."
+subhead: "{NAME} runs the whole journey — AR menu, self-ordering, kitchen, payments, and analytics — so your team moves faster and your guests come back."
+(Alternates to keep available: headline "From the table to the kitchen to the bill — one platform." / "Your restaurant, running in flow.")
+
+BRAND COLOURS (use as exact tokens; do not introduce other accent colours)
+- Saffron/gold = DOMINANT brand colour. Gradient from #F5A623 to #E8821E. Use for brand moments, hero warmth, highlights, key surfaces. Appetite + energy.
+- Royal indigo #1B2A6B = trust/technology anchor. Use for primary text on light, dark sections, depth, headings.
+- Teal/green #1DB47A = RESTRAINED accent. Use ONLY for buttons, links, and success/"ready" states. Never as a decorative fill or background.
+- Neutrals: warm cream background #FBF7F1; near-indigo ink for body text. Keep pure black and heavy grey to an absolute minimum.
+
+TYPOGRAPHY
+Two fonts only. Headings: a confident geometric display (Clash Display or Sora). Body: Inter. Self-host via Fontshare/Google Fonts subset for speed. Generous white space. Clean and editorial, NOT a busy dashboard look — clean reads as trustworthy.
+
+DESIGN DISCIPLINE
+Mobile-first, designed for an Indian restaurant owner opening it on a phone. Load light: compressed AVIF/WebP images, minimal heavy animation, lazy-load anything heavy. Show the product early via real screenshots / a short demo video (use clearly-marked placeholder slots). Use real food and restaurant imagery slots, not generic stock. Plenty of white space, one or two fonts, every section ends with a clear next step. The "Book a demo" CTA is the most prominent action on every page (sticky on mobile).
+
+STACK
+- Vite + React + TypeScript + Tailwind CSS.
+- 3D: @react-three/fiber, @react-three/drei, three.
+- 3D dish preview: @google/model-viewer (web component) as an in-browser interactive 3D viewer (rotate/zoom), GLB only. AR is intentionally NOT enabled in v1 but the code path is kept commented for later (enabling it would add USDZ for iOS Quick Look).
+- Motion: GSAP (+ ScrollTrigger) and Lenis for smooth scroll. Respect prefers-reduced-motion everywhere.
+- Routing: react-router-dom for the few legal pages; home stays a single scroll page.
+- Forms: Formspree (static-friendly) for the demo form; no backend.
+
+R3F PERFORMANCE RULES (follow strictly — these keep the site fast)
+- Animate in useFrame, never useEffect + requestAnimationFrame.
+- Mutate Three.js objects via refs; never call setState every frame.
+- Memoise heavy geometries/materials with useMemo.
+- Wrap scenes in Suspense with a lightweight poster/gradient fallback; use drei <Preload all />.
+- Clamp device pixel ratio: dpr={[1, 1.8]}. gl={{ antialias: true, powerPreference: "high-performance" }}.
+- Lazy-load the Canvas with React.lazy/dynamic import so it never blocks first paint.
+- Pause the render loop when the canvas is off-screen (IntersectionObserver) and when prefers-reduced-motion is set.
+- On low-end devices / small phones / reduced-motion, render a static hero IMAGE fallback instead of the live 3D.
+- Keep GLB models under ~100k triangles; Draco-compress them; load via useGLTF with Suspense.
+- Defer the model-viewer script and only initialise the 3D viewer when its section is near the viewport.
+
+ACCESSIBILITY & QUALITY BARS
+Semantic HTML, alt text on every image, keyboard-navigable, visible focus states, WCAG AA contrast (watch gold-on-white — darken to #E8821E or put gold on indigo). Target Lighthouse mobile Performance >= 90, Accessibility >= 95, Best Practices and SEO >= 95. All metrics/quotes/logos on the page are placeholders marked TODO.

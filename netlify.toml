@@ -1,0 +1,28 @@
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+# Missing static assets must 404 — not index.html (breaks GLTF loaders)
+[[redirects]]
+  from = "/models/*"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/img/*"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/assets/*"
+  to = "/404.html"
+  status = 404
+  force = true
+
+# SPA fallback — all other routes serve index.html (HTTPS enforced by Netlify)
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

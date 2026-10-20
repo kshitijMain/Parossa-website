@@ -1,0 +1,5 @@
+# Allow all crawlers. Sitemap URL is rewritten at build time from VITE_SITE_URL.
+User-agent: *
+Allow: /
+
+Sitemap: https://example.com/sitemap.xml
